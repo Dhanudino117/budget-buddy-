@@ -33,25 +33,25 @@ export function Layout({ children }: LayoutProps) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col overflow-hidden">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 glass-card border-b backdrop-blur-lg bg-white/60 dark:bg-gray-900/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-4">
+    <div className="flex min-h-screen flex-col">
+      {/* Mobile Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 glass-card border-b bg-white/60 dark:bg-gray-900/60 safe-area-top">
+        <div className="flex h-14 items-center justify-between px-4">
+          <div className="flex items-center gap-2">
             <button
               onClick={() => setIsNavOpen(!isNavOpen)}
               className="rounded-full p-2 transition-colors hover:bg-secondary"
               aria-label="Toggle menu"
             >
-              <Menu className="h-6 w-6" />
+              <Menu className="h-5 w-5" />
             </button>
-            <h1 className="text-xl font-medium">Budget Buddy</h1>
+            <h1 className="text-lg font-medium">Budget Buddy</h1>
           </div>
           <ThemeToggle />
         </div>
       </header>
 
-      {/* Navigation Drawer */}
+      {/* Mobile Navigation Drawer */}
       <div
         className={`fixed inset-0 z-50 bg-background/80 backdrop-blur-sm transition-opacity duration-300 ${
           isNavOpen ? "opacity-100" : "pointer-events-none opacity-0"
@@ -59,11 +59,11 @@ export function Layout({ children }: LayoutProps) {
         onClick={() => setIsNavOpen(false)}
       />
       <div
-        className={`fixed top-0 bottom-0 left-0 z-50 w-[270px] glass-card transition-transform duration-300 ${
+        className={`fixed top-0 bottom-0 left-0 z-50 w-[85%] max-w-[300px] glass-card transition-transform duration-300 safe-area-top ${
           isNavOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex h-16 items-center justify-between px-6">
+        <div className="flex h-14 items-center justify-between px-6">
           <span className="text-lg font-medium">Budget Buddy</span>
           <button
             onClick={() => setIsNavOpen(false)}
@@ -73,7 +73,7 @@ export function Layout({ children }: LayoutProps) {
             <X className="h-5 w-5" />
           </button>
         </div>
-        <nav className="flex flex-col gap-2 px-4 py-6">
+        <nav className="flex flex-col gap-1 p-3">
           {navItems.map((item) => (
             <Link
               key={item.path}
@@ -92,9 +92,31 @@ export function Layout({ children }: LayoutProps) {
         </nav>
       </div>
 
-      {/* Main Content */}
-      <main className="container flex-1 pt-24 pb-8">
-        {children}
+      {/* Bottom Navigation Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 glass-card border-t bg-white/60 dark:bg-gray-900/60 safe-area-bottom">
+        <div className="flex h-16 items-center justify-around px-2">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`flex flex-col items-center justify-center rounded-md p-2 ${
+                isActive(item.path)
+                  ? "text-primary"
+                  : "text-muted-foreground"
+              }`}
+            >
+              {item.icon}
+              <span className="text-xs mt-1">{item.label}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content with mobile padding */}
+      <main className="flex-1 pt-14 pb-20">
+        <div className="px-4 py-4">
+          {children}
+        </div>
       </main>
     </div>
   );

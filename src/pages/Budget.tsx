@@ -16,50 +16,50 @@ const Budget = () => {
   );
 
   return (
-    <div className="space-y-6 animate-fadeIn">
-      <h1 className="text-2xl font-bold">Budget Management</h1>
+    <div className="space-y-4 animate-fadeIn">
+      <h1 className="text-xl font-bold">Budget Management</h1>
       
-      <div className="glass-card rounded-xl p-6">
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
-              <PiggyBank className="h-6 w-6 text-primary" />
+      <div className="glass-card rounded-xl p-4">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
+              <PiggyBank className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <h2 className="text-lg font-medium">Monthly Budget</h2>
-              <p className="text-sm text-muted-foreground">May 2023</p>
+              <h2 className="text-base font-medium">Monthly Budget</h2>
+              <p className="text-xs text-muted-foreground">May 2023</p>
             </div>
           </div>
-          <button className="flex items-center gap-1 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
-            <Plus className="h-4 w-4" />
-            <span>Add Budget</span>
+          <button className="flex items-center gap-1 rounded-full bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground">
+            <Plus className="h-3.5 w-3.5" />
+            <span>Add</span>
           </button>
         </div>
         
         {(hasOverBudget || hasNearBudget) && (
-          <div className={`p-4 rounded-lg mb-6 flex items-start gap-3 ${
+          <div className={`p-3 rounded-lg mb-4 flex items-start gap-2 ${
             hasOverBudget ? "bg-destructive/10" : "bg-amber-500/10"
           }`}>
-            <AlertTriangle className={`h-5 w-5 mt-0.5 ${
+            <AlertTriangle className={`h-4 w-4 mt-0.5 ${
               hasOverBudget ? "text-destructive" : "text-amber-500"
             }`} />
             <div>
-              <p className="font-medium">
+              <p className="text-sm font-medium">
                 {hasOverBudget 
-                  ? "You've exceeded budget in some categories!"
-                  : "You're getting close to your budget limit!"}
+                  ? "Budget exceeded in some categories!"
+                  : "Getting close to budget limit!"}
               </p>
-              <p className="text-sm text-muted-foreground">
-                Consider adjusting your spending for the rest of the month.
+              <p className="text-xs text-muted-foreground">
+                Adjust spending for this month.
               </p>
             </div>
           </div>
         )}
         
-        <div className="mb-8">
+        <div className="mb-6">
           <div className="flex justify-between mb-2">
-            <h3 className="font-medium">Total Budget</h3>
-            <span className={`text-sm font-medium ${
+            <h3 className="text-sm font-medium">Total Budget</h3>
+            <span className={`text-xs font-medium ${
               totalPercentage >= 100 ? 'text-destructive' : 
               totalPercentage >= 80 ? 'text-amber-500' : 
               'text-green-500'
@@ -68,7 +68,7 @@ const Budget = () => {
             </span>
           </div>
           
-          <div className="mb-2 flex items-end justify-between text-sm">
+          <div className="mb-2 flex items-end justify-between text-xs">
             <span>₹{totalSpent.toLocaleString()}</span>
             <span className="text-muted-foreground">of ₹{totalAllocated.toLocaleString()}</span>
           </div>
@@ -87,7 +87,7 @@ const Budget = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="space-y-3">
           {budgets.map((budget) => (
             <BudgetProgress key={budget.id} budget={budget} />
           ))}

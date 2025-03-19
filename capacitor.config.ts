@@ -9,12 +9,18 @@ const config: CapacitorConfig = {
     url: 'https://0860500d-9db1-4bf3-8d2a-205541395e8a.lovableproject.com?forceHideBadge=true',
     cleartext: true
   },
-  // Add status bar customization
+  // Enhanced mobile optimizations
   ios: {
-    contentInset: 'automatic'
+    contentInset: 'automatic',
+    allowsLinkPreview: false,
+    scrollEnabled: false,
+    webViewType: 'WKWebView'
   },
   android: {
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    allowMixedContent: true,
+    captureInput: true,
+    webContentsDebuggingEnabled: true
   }
 };
 

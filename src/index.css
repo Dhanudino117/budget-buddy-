@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -71,15 +70,50 @@
   * {
     @apply border-border;
   }
+  html, body {
+    @apply overscroll-none touch-manipulation;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+  
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overscroll-behavior: none;
+    touch-action: manipulation;
+    user-select: none;
+  }
+  
+  button, a {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
 @layer utilities {
   .glass-card {
     @apply bg-white/60 dark:bg-gray-900/60 backdrop-blur-lg border border-white/20 dark:border-gray-800/20 shadow-lg;
+  }
+  
+  .mobile-card {
+    @apply rounded-xl shadow-md border border-white/10 dark:border-gray-800/10 p-4;
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0) + 1rem);
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top, 0);
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+  
+  @media (hover: none) {
+    .hover\:bg-secondary:hover {
+      background-color: transparent;
+    }
   }
 }
 
