@@ -9,8 +9,8 @@ const Transactions = () => {
 
   const filteredTransactions = transactions.filter((transaction) => {
     if (activeFilter === "all") return true;
-    if (activeFilter === "upi") return transaction.method === "UPI";
-    if (activeFilter === "direct") return transaction.method === "Card" || transaction.method === "ATM";
+    if (activeFilter === "upi") return transaction.paymentMethod === "UPI";
+    if (activeFilter === "direct") return transaction.paymentMethod === "Card" || transaction.paymentMethod === "ATM";
     return true;
   });
 
